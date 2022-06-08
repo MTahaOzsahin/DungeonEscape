@@ -146,11 +146,33 @@
                 },
                 {
                     "name": "",
+                    "id": "ec040b33-be92-48fd-8824-01db8d20f0fc",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "81ca08b8-be71-49c1-96eb-727230bf9acc",
                     "path": "<Keyboard>/space",
                     "interactions": "MultiTap",
                     "processors": "",
                     "groups": "KeyBoard",
+                    "action": "DoubleJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aea2bb62-a690-4c1f-8469-95ea0a014a79",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "MultiTap",
+                    "processors": "",
+                    "groups": "",
                     "action": "DoubleJump",
                     "isComposite": false,
                     "isPartOfComposite": false
