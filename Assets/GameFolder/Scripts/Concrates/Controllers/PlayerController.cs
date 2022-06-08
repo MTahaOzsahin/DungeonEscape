@@ -12,55 +12,65 @@ namespace DungeonEscape.Concrates.Controllers
     public class PlayerController : MonoBehaviour , IEntityController
     {
         IMyAnimation myAnimation;
-        IFlip flip;
+        IFliper fliper;
+        IMover mover;
+        IOnGroundChecker onGroundChecker;
+        IJumper jumper;
         InputsControllers inputControllers;
 
-        [SerializeField] float  moveSpeed;
-        [SerializeField] float jumpForce;
+        float timer = 0f;
 
         private void Awake()
         {
             inputControllers = new InputsControllers();
             myAnimation = new CharacterAnimations(GetComponent<Animator>());
-            flip = new Flip(this);
+            mover = new Mover(this);
+            fliper = new Fliper(this);
+            jumper = new Jumper(GetComponent<Rigidbody2D>());
+            onGroundChecker = GetComponent<IOnGroundChecker>();
         }
 
         private void OnEnable()
         {
             inputControllers.Enable();
             inputControllers.Land.Jump.started += jump;
-            inputControllers.Land.DoubleJump.performed += DoubleJump;
+            inputControllers.Land.DoubleJump.performed += jump;
         }
 
         private void OnDisable()
         {
             inputControllers.Disable();
             inputControllers.Land.Jump.started -= jump;
-            inputControllers.Land.DoubleJump.performed -= DoubleJump;
+            inputControllers.Land.DoubleJump.performed -= jump;
         }
 
         private void Update()
         {
-            MovementAndFlip();
+            FlipAndMovement();
             Animations();
         }
 
-        void MovementAndFlip()
+        void FlipAndMovement()
         {
             Vector2 direction = inputControllers.Land.Movement.ReadValue<Vector2>();
-            flip.FlipCharacter(direction.x);
-            transform.Translate(moveSpeed * Time.deltaTime * direction);
+            fliper.FlipCharacter(direction.x);
+            mover.Movement(direction);
         }
 
         void jump(InputAction.CallbackContext context)
         {
-            this.gameObject.GetComponent<Rigidbody2D>().AddForce(jumpForce * Time.fixedDeltaTime * Vector2.up * 100f);
+            if (onGroundChecker.IsGround)
+            {
+                jumper.Jump();
+                timer += Time.deltaTime;
+            }
+            if (context.performed && timer != 0f)
+            {
+                jumper.Jump();
+                timer = 0f;
+            }
         }
-        void DoubleJump(InputAction.CallbackContext context)
-        {
-            this.gameObject.GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            this.gameObject.GetComponent<Rigidbody2D>().AddForce(jumpForce * Time.fixedDeltaTime * Vector2.up * 100f);
-        }
+       
 
         void Animations()
         {

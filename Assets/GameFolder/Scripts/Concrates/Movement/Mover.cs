@@ -1,4 +1,5 @@
 using DungeonEscape.Abstracts;
+using DungeonEscape.Concrates.Controllers;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,14 +8,17 @@ namespace DungeonEscape.Concrates.Movement
 {
     public class Mover : IMover
     {
-        public Mover()
+        PlayerController playerController;
+
+        float moveSpeed=5f;
+        public Mover(PlayerController player)
         {
-            //parametreye scritp referansý verilecek ve o scriptde new þeklinde instance alýnacak.
+            playerController = player;
         }
 
-        public void Tick(float horizontal)
+        public void Movement(Vector2 direction)
         {
-            //hareket iþlemleri burada yapýlacak
+            playerController.transform.Translate(moveSpeed * Time.deltaTime * direction);
         }
     }
 }
