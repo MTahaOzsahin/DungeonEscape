@@ -31,6 +31,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
+                },
+                {
+                    "name": "Attack",
+                    "type": "Value",
+                    "id": "3ad343d9-f2ee-4f77-a87d-287013c820bc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PowerAttack",
+                    "type": "Value",
+                    "id": "349e3584-90ed-4940-a77b-ad8c9b1dfa3e",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
                 }
             ],
             "bindings": [
@@ -117,7 +135,7 @@
                     "path": "<Gamepad>/leftStick/left",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -128,7 +146,7 @@
                     "path": "<Gamepad>/leftStick/right",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Movement",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -150,7 +168,7 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -172,8 +190,52 @@
                     "path": "<Gamepad>/buttonSouth",
                     "interactions": "MultiTap",
                     "processors": "",
-                    "groups": "",
+                    "groups": "GamePad",
                     "action": "DoubleJump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac7a0eee-b9dd-471e-82ea-2d1c0c6fa385",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b2ee3fe6-f68b-443c-b616-63f572897961",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Tap",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "Attack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6986dacd-a755-430c-aa65-a9cd8d635141",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "Hold(pressPoint=1.401298E-45)",
+                    "processors": "",
+                    "groups": "GamePad",
+                    "action": "PowerAttack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "9bdb04cb-4255-41f6-980b-fa500eeb203e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "Hold",
+                    "processors": "",
+                    "groups": "KeyBoard",
+                    "action": "PowerAttack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -192,6 +254,17 @@
                 },
                 {
                     "devicePath": "<Mouse>",
+                    "isOptional": false,
+                    "isOR": false
+                }
+            ]
+        },
+        {
+            "name": "GamePad",
+            "bindingGroup": "GamePad",
+            "devices": [
+                {
+                    "devicePath": "<Gamepad>",
                     "isOptional": false,
                     "isOR": false
                 }

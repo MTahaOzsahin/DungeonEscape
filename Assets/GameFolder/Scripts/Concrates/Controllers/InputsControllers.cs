@@ -55,6 +55,24 @@ namespace DungeonEscape.Concrates.Controllers
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Attack"",
+                    ""type"": ""Value"",
+                    ""id"": ""3ad343d9-f2ee-4f77-a87d-287013c820bc"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""PowerAttack"",
+                    ""type"": ""Value"",
+                    ""id"": ""349e3584-90ed-4940-a77b-ad8c9b1dfa3e"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -141,7 +159,7 @@ namespace DungeonEscape.Concrates.Controllers
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -152,7 +170,7 @@ namespace DungeonEscape.Concrates.Controllers
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Movement"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -174,7 +192,7 @@ namespace DungeonEscape.Concrates.Controllers
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""Jump"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -196,8 +214,52 @@ namespace DungeonEscape.Concrates.Controllers
                     ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": ""MultiTap"",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""GamePad"",
                     ""action"": ""DoubleJump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac7a0eee-b9dd-471e-82ea-2d1c0c6fa385"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b2ee3fe6-f68b-443c-b616-63f572897961"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Tap"",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""Attack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6986dacd-a755-430c-aa65-a9cd8d635141"",
+                    ""path"": ""<Gamepad>/buttonWest"",
+                    ""interactions"": ""Hold(pressPoint=1.401298E-45)"",
+                    ""processors"": """",
+                    ""groups"": ""GamePad"",
+                    ""action"": ""PowerAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9bdb04cb-4255-41f6-980b-fa500eeb203e"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": ""Hold"",
+                    ""processors"": """",
+                    ""groups"": ""KeyBoard"",
+                    ""action"": ""PowerAttack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -220,6 +282,17 @@ namespace DungeonEscape.Concrates.Controllers
                     ""isOR"": false
                 }
             ]
+        },
+        {
+            ""name"": ""GamePad"",
+            ""bindingGroup"": ""GamePad"",
+            ""devices"": [
+                {
+                    ""devicePath"": ""<Gamepad>"",
+                    ""isOptional"": false,
+                    ""isOR"": false
+                }
+            ]
         }
     ]
 }");
@@ -228,6 +301,8 @@ namespace DungeonEscape.Concrates.Controllers
             m_Land_Movement = m_Land.FindAction("Movement", throwIfNotFound: true);
             m_Land_Jump = m_Land.FindAction("Jump", throwIfNotFound: true);
             m_Land_DoubleJump = m_Land.FindAction("DoubleJump", throwIfNotFound: true);
+            m_Land_Attack = m_Land.FindAction("Attack", throwIfNotFound: true);
+            m_Land_PowerAttack = m_Land.FindAction("PowerAttack", throwIfNotFound: true);
         }
 
         public void Dispose()
@@ -290,6 +365,8 @@ namespace DungeonEscape.Concrates.Controllers
         private readonly InputAction m_Land_Movement;
         private readonly InputAction m_Land_Jump;
         private readonly InputAction m_Land_DoubleJump;
+        private readonly InputAction m_Land_Attack;
+        private readonly InputAction m_Land_PowerAttack;
         public struct LandActions
         {
             private @InputsControllers m_Wrapper;
@@ -297,6 +374,8 @@ namespace DungeonEscape.Concrates.Controllers
             public InputAction @Movement => m_Wrapper.m_Land_Movement;
             public InputAction @Jump => m_Wrapper.m_Land_Jump;
             public InputAction @DoubleJump => m_Wrapper.m_Land_DoubleJump;
+            public InputAction @Attack => m_Wrapper.m_Land_Attack;
+            public InputAction @PowerAttack => m_Wrapper.m_Land_PowerAttack;
             public InputActionMap Get() { return m_Wrapper.m_Land; }
             public void Enable() { Get().Enable(); }
             public void Disable() { Get().Disable(); }
@@ -315,6 +394,12 @@ namespace DungeonEscape.Concrates.Controllers
                     @DoubleJump.started -= m_Wrapper.m_LandActionsCallbackInterface.OnDoubleJump;
                     @DoubleJump.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnDoubleJump;
                     @DoubleJump.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnDoubleJump;
+                    @Attack.started -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
+                    @Attack.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
+                    @Attack.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnAttack;
+                    @PowerAttack.started -= m_Wrapper.m_LandActionsCallbackInterface.OnPowerAttack;
+                    @PowerAttack.performed -= m_Wrapper.m_LandActionsCallbackInterface.OnPowerAttack;
+                    @PowerAttack.canceled -= m_Wrapper.m_LandActionsCallbackInterface.OnPowerAttack;
                 }
                 m_Wrapper.m_LandActionsCallbackInterface = instance;
                 if (instance != null)
@@ -328,6 +413,12 @@ namespace DungeonEscape.Concrates.Controllers
                     @DoubleJump.started += instance.OnDoubleJump;
                     @DoubleJump.performed += instance.OnDoubleJump;
                     @DoubleJump.canceled += instance.OnDoubleJump;
+                    @Attack.started += instance.OnAttack;
+                    @Attack.performed += instance.OnAttack;
+                    @Attack.canceled += instance.OnAttack;
+                    @PowerAttack.started += instance.OnPowerAttack;
+                    @PowerAttack.performed += instance.OnPowerAttack;
+                    @PowerAttack.canceled += instance.OnPowerAttack;
                 }
             }
         }
@@ -341,11 +432,22 @@ namespace DungeonEscape.Concrates.Controllers
                 return asset.controlSchemes[m_KeyBoardSchemeIndex];
             }
         }
+        private int m_GamePadSchemeIndex = -1;
+        public InputControlScheme GamePadScheme
+        {
+            get
+            {
+                if (m_GamePadSchemeIndex == -1) m_GamePadSchemeIndex = asset.FindControlSchemeIndex("GamePad");
+                return asset.controlSchemes[m_GamePadSchemeIndex];
+            }
+        }
         public interface ILandActions
         {
             void OnMovement(InputAction.CallbackContext context);
             void OnJump(InputAction.CallbackContext context);
             void OnDoubleJump(InputAction.CallbackContext context);
+            void OnAttack(InputAction.CallbackContext context);
+            void OnPowerAttack(InputAction.CallbackContext context);
         }
     }
 }

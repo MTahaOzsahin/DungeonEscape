@@ -14,10 +14,26 @@ namespace DungeonEscape.Concrates.Animations
             _animator = animator;
         }
 
+        public void AttackingAnimation()
+        {
+            _animator.SetTrigger("attacking");
+        }
+        public void PowerAttackingAnimation()
+        {
+            _animator.SetTrigger("powerAttacking");
+        }
+        public void JumpingAnimation(bool isJumping)
+        {
+            if (_animator.GetBool("isJumping") == isJumping) return;
+            _animator.SetBool("isJumping", isJumping);
+        }
+
         public void MoveAnimation(float moveSpeed)
         {
             _animator.SetFloat("moveSpeed", Mathf.Abs(moveSpeed));
         }
+
+       
     }
 
 }

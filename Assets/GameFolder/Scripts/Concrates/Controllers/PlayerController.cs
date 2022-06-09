@@ -35,6 +35,8 @@ namespace DungeonEscape.Concrates.Controllers
             inputControllers.Enable();
             inputControllers.Land.Jump.started += jump;
             inputControllers.Land.DoubleJump.performed += jump;
+            inputControllers.Land.Attack.performed += AttackAnimations;
+            inputControllers.Land.PowerAttack.performed += PowerAttackAnimations;
         }
 
         private void OnDisable()
@@ -42,6 +44,8 @@ namespace DungeonEscape.Concrates.Controllers
             inputControllers.Disable();
             inputControllers.Land.Jump.started -= jump;
             inputControllers.Land.DoubleJump.performed -= jump;
+            inputControllers.Land.Attack.performed -= AttackAnimations;
+            inputControllers.Land.PowerAttack.performed -= PowerAttackAnimations;
         }
 
         private void Update()
@@ -76,6 +80,15 @@ namespace DungeonEscape.Concrates.Controllers
         {
             Vector2 moveSpeed = inputControllers.Land.Movement.ReadValue<Vector2>();
             myAnimation.MoveAnimation(moveSpeed.x);
+            myAnimation.JumpingAnimation(!onGroundChecker.IsGround);
+        }
+        void AttackAnimations(InputAction.CallbackContext context)
+        {
+            myAnimation.AttackingAnimation();
+        }
+        void PowerAttackAnimations(InputAction.CallbackContext context)
+        {
+            myAnimation.PowerAttackingAnimation();
         }
     }
 }
