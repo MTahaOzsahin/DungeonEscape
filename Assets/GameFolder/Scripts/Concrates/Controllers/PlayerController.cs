@@ -20,11 +20,13 @@ namespace DungeonEscape.Concrates.Controllers
 
         float timer = 0f;
 
+        [SerializeField]float moveSpeed = 3f;
+
         private void Awake()
         {
             inputControllers = new InputsControllers();
             myAnimation = new CharacterAnimations(GetComponent<Animator>());
-            mover = new Mover(this);
+            mover = new Mover(this,moveSpeed);
             fliper = new Fliper(this);
             jumper = new Jumper(GetComponent<Rigidbody2D>());
             onGroundChecker = GetComponent<IOnGroundChecker>();

@@ -8,17 +8,19 @@ namespace DungeonEscape.Concrates.Movement
 {
     public class Mover : IMover
     {
-        PlayerController playerController;
+        IEntityController _playerController;
 
-        float moveSpeed=5f;
-        public Mover(PlayerController player)
+        //float moveSpeed=5f;
+        float _moveSpeed;
+        public Mover(IEntityController controller, float moveSpeed)
         {
-            playerController = player;
+            _playerController = controller;
+            _moveSpeed = moveSpeed;
         }
 
         public void Movement(Vector2 direction)
         {
-            playerController.transform.Translate(moveSpeed * Time.deltaTime * direction);
+            _playerController.transform.Translate(_moveSpeed * Time.deltaTime * direction);
         }
     }
 }

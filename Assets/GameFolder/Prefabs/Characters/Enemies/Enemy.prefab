@@ -12,7 +12,9 @@ GameObject:
   - component: {fileID: 5222353574200520799}
   - component: {fileID: 5222353574200520796}
   - component: {fileID: -4586002733896944432}
+  - component: {fileID: -8820532407843523825}
   - component: {fileID: 4365013849661558134}
+  - component: {fileID: 6553313928351640292}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -100,6 +102,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &-8820532407843523825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222353574200520797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13964d359c7d204a820ac6d81f31f4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &4365013849661558134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,3 +127,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+--- !u!114 &6553313928351640292
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222353574200520797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7b85a58d61b49540bca91ecfd5d8fef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footTransforms: []
+  landLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
