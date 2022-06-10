@@ -5,10 +5,13 @@ using UnityEngine;
 
 namespace DungeonEscape.Concrates.Combats
 {
-    public class Health : MonoBehaviour, ITakeHit
+    public class Health : MonoBehaviour, IHealth
     {
         [SerializeField] int maxHealth = 3;
         int currentHealth;
+        public int CurrentHealth => currentHealth;
+
+        public event System.Action OnHealthChange;
 
         private void Awake()
         {
@@ -17,6 +20,7 @@ namespace DungeonEscape.Concrates.Combats
         public void TakeHit(IAttacker attacker)
         {
             currentHealth -= attacker.Damage;
+            OnHealthChange?.Invoke();
         }
     }
 }

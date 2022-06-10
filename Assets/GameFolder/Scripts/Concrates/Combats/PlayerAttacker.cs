@@ -34,7 +34,7 @@ namespace DungeonEscape.Concrates.Combats
 
                 if (takeHit != null)
                 {
-                    takeHit.TakeHit(this);
+                    Attack(takeHit);
                 }
             }
         }

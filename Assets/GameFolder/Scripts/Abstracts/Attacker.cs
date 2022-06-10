@@ -9,9 +9,9 @@ namespace DungeonEscape.Abstracts
     {
         [SerializeField] int damage = 1;
 
-        int IAttacker.Damage => damage;
+        public int Damage => damage;
 
-        public void Attack(ITakeHit takehit)
+        public virtual void Attack(ITakeHit takehit)
         {
             takehit.TakeHit(this);
         }

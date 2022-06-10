@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -4586002733896944432}
   - component: {fileID: -8820532407843523825}
   - component: {fileID: 4365013849661558134}
-  - component: {fileID: 6553313928351640292}
+  - component: {fileID: 2714501128978385628}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,6 +114,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13964d359c7d204a820ac6d81f31f4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  moveSpeed: 2
 --- !u!114 &4365013849661558134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +128,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
---- !u!114 &6553313928351640292
+--- !u!114 &2714501128978385628
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -136,10 +137,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 5222353574200520797}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7b85a58d61b49540bca91ecfd5d8fef, type: 3}
+  m_Script: {fileID: 11500000, guid: c64cdb6581a94714287fb2a85fc90992, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  footTransforms: []
-  landLayerMask:
-    serializedVersion: 2
-    m_Bits: 0
+  damage: 1
