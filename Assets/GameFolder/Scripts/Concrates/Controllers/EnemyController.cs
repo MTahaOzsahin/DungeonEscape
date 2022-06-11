@@ -23,7 +23,7 @@ namespace DungeonEscape.Concrates.Controllers
         [SerializeField] float moveSpeed = 2f;
         [SerializeField] float chaseDistance = 3f;
         [SerializeField] float attackDistance = 1f;
-        [SerializeField] bool isWalk = false;
+        [SerializeField] Transform[] patrols;
         [SerializeField] bool isTakeHit = false;
         private void Awake()
         {
@@ -45,19 +45,19 @@ namespace DungeonEscape.Concrates.Controllers
         }
         private void Start()
         {
-            Idle idle = new Idle();
-            Walk walk = new Walk();
+            Idle idle = new Idle(this,mover,myAnimation,fliper);
+            Walk walk = new Walk(this, mover,myAnimation,patrols);
             ChasePlayer chasePlayer = new ChasePlayer();
             Attack attack = new Attack();
             TakeHit takeHit = new TakeHit();
             Dead dead = new Dead();
 
-            _stateMachine.AddTransition(idle, walk,() => isWalk);
+            _stateMachine.AddTransition(idle, walk,() => !idle.IsIdle);
             _stateMachine.AddTransition(idle, chasePlayer, () => DistanceFromMeToPlayer() < chaseDistance);
             _stateMachine.AddTransition(walk, chasePlayer, () => DistanceFromMeToPlayer() < chaseDistance);
             _stateMachine.AddTransition(chasePlayer, attack, () => DistanceFromMeToPlayer() < attackDistance);
 
-            _stateMachine.AddTransition(walk, idle, () => !isWalk);
+            _stateMachine.AddTransition(walk, idle, () => !walk.IsWalking);
             _stateMachine.AddTransition(chasePlayer, idle, () => DistanceFromMeToPlayer() > chaseDistance);
             _stateMachine.AddTransition(attack, chasePlayer, () => DistanceFromMeToPlayer() > attackDistance);
 
