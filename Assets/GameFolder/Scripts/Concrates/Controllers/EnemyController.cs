@@ -22,7 +22,7 @@ namespace DungeonEscape.Concrates.Controllers
 
         [SerializeField] float moveSpeed = 2f;
         [SerializeField] float chaseDistance = 3f;
-        [SerializeField] float attackDistance = 1f;
+        [SerializeField] float attackDistance = 0.5f;
         [SerializeField] Transform[] patrols;
         [SerializeField] bool isTakeHit = false;
         private void Awake()
@@ -47,7 +47,7 @@ namespace DungeonEscape.Concrates.Controllers
         {
             Idle idle = new Idle(this,mover,myAnimation,fliper);
             Walk walk = new Walk(this, mover,myAnimation,patrols);
-            ChasePlayer chasePlayer = new ChasePlayer();
+            ChasePlayer chasePlayer = new ChasePlayer(this,_player,mover,fliper,myAnimation);
             Attack attack = new Attack();
             TakeHit takeHit = new TakeHit();
             Dead dead = new Dead();
