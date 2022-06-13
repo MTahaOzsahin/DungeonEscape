@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: -8820532407843523825}
   - component: {fileID: 4365013849661558134}
   - component: {fileID: 2714501128978385628}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,6 +115,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 2
+  patrols: []
+  chaseDistance: 3
+  attackDistance: 0.5
 --- !u!114 &4365013849661558134
 MonoBehaviour:
   m_ObjectHideFlags: 0

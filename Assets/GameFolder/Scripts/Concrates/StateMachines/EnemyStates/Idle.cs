@@ -9,20 +9,16 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
     {
         IMover _mover;
         IMyAnimation _animation;
-        IFliper _fliper;
-        IEntityController _entityController;
 
         float maxStandTime;
         float currentStandTime = 0f;
 
 
         public bool IsIdle { get;private set; }
-        public Idle(IEntityController entityController,IMover mover,IMyAnimation animation,IFliper fliper)
+        public Idle(IMover mover,IMyAnimation animation)
         {
             _mover = mover;
             _animation = animation;
-            _fliper = fliper;
-            _entityController = entityController;
         }
         public void OnEnter()
         {
@@ -34,7 +30,6 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
         public void OnExit()
         {
             currentStandTime = 0f;
-            _fliper.FlipCharacter(_entityController.transform.localScale.x * -1);
         }
 
         public void Tick()

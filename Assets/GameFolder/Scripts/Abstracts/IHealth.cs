@@ -6,7 +6,7 @@ namespace DungeonEscape.Abstracts
 {
     public interface IHealth : ITakeHit
     {
-        int CurrentHealth { get; }
+        bool IsDead { get; }
         event System.Action OnHealthChange;
     }
 }

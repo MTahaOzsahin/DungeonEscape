@@ -10,6 +10,8 @@ namespace DungeonEscape.Abstracts
         void JumpingAnimation(bool isJumping);
         void AttackingAnimation();
         void PowerAttackingAnimation();
+        void TakeHitAnimation();
+        void DeadAnimation();
     }
 }
 

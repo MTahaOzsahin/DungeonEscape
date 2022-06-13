@@ -19,12 +19,12 @@ namespace DungeonEscape.Concrates.Controllers
 
         IEntityController _player;
         IHealth _health;
-
+        [Header("Movements")]
         [SerializeField] float moveSpeed = 2f;
+        [SerializeField] Transform[] patrols;
+        [Header("Attack")]
         [SerializeField] float chaseDistance = 3f;
         [SerializeField] float attackDistance = 0.5f;
-        [SerializeField] Transform[] patrols;
-        [SerializeField] bool isTakeHit = false;
         private void Awake()
         {
             mover = new Mover(this,moveSpeed);
@@ -35,22 +35,14 @@ namespace DungeonEscape.Concrates.Controllers
 
             _player = FindObjectOfType<PlayerController>();
         }
-        private void OnEnable()
-        {
-            _health.OnHealthChange += HandleHealthChange;   
-        }
-        private void OnDisable()
-        {
-            _health.OnHealthChange -= HandleHealthChange;
-        }
         private void Start()
         {
-            Idle idle = new Idle(this,mover,myAnimation,fliper);
-            Walk walk = new Walk(this, mover,myAnimation,patrols);
+            Idle idle = new Idle(mover,myAnimation);
+            Walk walk = new Walk(this, mover,myAnimation,fliper,patrols);
             ChasePlayer chasePlayer = new ChasePlayer(this,_player,mover,fliper,myAnimation);
             Attack attack = new Attack();
-            TakeHit takeHit = new TakeHit();
-            Dead dead = new Dead();
+            TakeHit takeHit = new TakeHit(_health,myAnimation);
+            Dead dead = new Dead(this,myAnimation);
 
             _stateMachine.AddTransition(idle, walk,() => !idle.IsIdle);
             _stateMachine.AddTransition(idle, chasePlayer, () => DistanceFromMeToPlayer() < chaseDistance);
@@ -61,10 +53,10 @@ namespace DungeonEscape.Concrates.Controllers
             _stateMachine.AddTransition(chasePlayer, idle, () => DistanceFromMeToPlayer() > chaseDistance);
             _stateMachine.AddTransition(attack, chasePlayer, () => DistanceFromMeToPlayer() > attackDistance);
 
-            _stateMachine.AddAnyState(dead, () => _health.CurrentHealth < 1);
-            _stateMachine.AddAnyState(takeHit, () => isTakeHit);
+            _stateMachine.AddAnyState(dead, () => _health.IsDead);
+            _stateMachine.AddAnyState(takeHit, () => takeHit.IsTakeHit);
 
-            _stateMachine.AddTransition(takeHit, chasePlayer, () => isTakeHit == false);
+            _stateMachine.AddTransition(takeHit, chasePlayer, () => takeHit.IsTakeHit == false);
 
             _stateMachine.SetState(idle);
         }
@@ -73,11 +65,6 @@ namespace DungeonEscape.Concrates.Controllers
         {
             _stateMachine.Tick();
         }
-        void HandleHealthChange()
-        {
-            isTakeHit = true;
-        }
-
         private void OnDrawGizmos()
         {
             OnDrawGizmosSelected();

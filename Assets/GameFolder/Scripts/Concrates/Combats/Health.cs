@@ -9,7 +9,8 @@ namespace DungeonEscape.Concrates.Combats
     {
         [SerializeField] int maxHealth = 3;
         int currentHealth;
-        public int CurrentHealth => currentHealth;
+
+        public bool IsDead => currentHealth < 1;
 
         public event System.Action OnHealthChange;
 
@@ -19,6 +20,7 @@ namespace DungeonEscape.Concrates.Combats
         }
         public void TakeHit(IAttacker attacker)
         {
+            if (IsDead) return;
             currentHealth -= attacker.Damage;
             OnHealthChange?.Invoke();
         }

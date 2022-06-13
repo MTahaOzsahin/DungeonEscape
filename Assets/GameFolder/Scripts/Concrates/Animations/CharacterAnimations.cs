@@ -33,7 +33,15 @@ namespace DungeonEscape.Concrates.Animations
             _animator.SetFloat("moveSpeed", Mathf.Abs(moveSpeed));
         }
 
-       
+        public void TakeHitAnimation()
+        {
+            _animator.SetTrigger("takeHit");
+        }
+
+        public void DeadAnimation()
+        {
+            _animator.SetTrigger("death");
+        }
     }
 
 }

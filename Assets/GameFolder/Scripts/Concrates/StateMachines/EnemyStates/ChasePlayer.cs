@@ -36,21 +36,12 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
             if (leftOrRight.x > 0)
             {
                 _mover.Movement(Vector2.right);
-                if (_entityController.transform.localScale.x == -1)
-                {
-                    _fliper.FlipCharacter(-1f);
-                    Debug.Log("sað");
-                }
+                _entityController.transform.localScale = new Vector3(1f,1f,1f); 
             }
             else
             {
-                _mover.Movement(-Vector2.right);   // buradan devam edielcek flip düzgün çalýþmýyor
-                Debug.Log("ssol");
-                if (_entityController.transform.localScale.x == 1)
-                {
-                    _fliper.FlipCharacter(-1f);
-                    Debug.Log("ssol");
-                }
+                _mover.Movement(-Vector2.right);
+                _entityController.transform.localScale = new Vector3(-1f, 1f, 1f); 
             }
         }
     }
