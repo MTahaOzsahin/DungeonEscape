@@ -8,7 +8,7 @@ namespace DungeonEscape.Concrates.Combats
     public class Health : MonoBehaviour, IHealth
     {
         [SerializeField] int maxHealth = 3;
-        int currentHealth;
+        [SerializeField] int currentHealth;
 
         public bool IsDead => currentHealth < 1;
 

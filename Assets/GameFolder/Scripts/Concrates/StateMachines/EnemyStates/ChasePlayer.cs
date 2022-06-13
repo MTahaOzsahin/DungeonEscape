@@ -7,18 +7,18 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
 {
     public class ChasePlayer : IStates
     {
-        IEntityController _entityController;
-        IEntityController _player;
+        IEntityController _enemyController;
         IMover _mover;
         IFliper _fliper;
         IMyAnimation _myAnimation;
-        public ChasePlayer(IEntityController entityController, IEntityController player,IMover mover,IFliper fliper,IMyAnimation myAnimation)
+        System.Func<bool> _isPlayerRightSide;
+        public ChasePlayer(IEntityController enemyController,IMover mover,IFliper fliper,IMyAnimation myAnimation,System.Func<bool> isPlayerRightSide)
         {
-            _entityController = entityController;
-            _player = player;
+            _enemyController = enemyController;
             _mover = mover;
             _fliper = fliper;
             _myAnimation = myAnimation;
+            _isPlayerRightSide = isPlayerRightSide;
         }
         public void OnEnter()
         {
@@ -32,16 +32,15 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
 
         public void Tick()
         {
-            Vector3 leftOrRight = _player.transform.position - _entityController.transform.position;
-            if (leftOrRight.x > 0)
+            if (_isPlayerRightSide.Invoke())
             {
                 _mover.Movement(Vector2.right);
-                _entityController.transform.localScale = new Vector3(1f,1f,1f); 
+                _enemyController.transform.localScale = new Vector3(1f,1f,1f); 
             }
             else
             {
                 _mover.Movement(-Vector2.right);
-                _entityController.transform.localScale = new Vector3(-1f, 1f, 1f); 
+                _enemyController.transform.localScale = new Vector3(-1f, 1f, 1f); 
             }
         }
     }

@@ -11,37 +11,34 @@ namespace DungeonEscape.Concrates.Controllers
 {
     public class EnemyController : MonoBehaviour ,IEntityController
     {
-        IMover mover;
-        IMyAnimation myAnimation;
-        IFliper fliper;
-
         StateMachine _stateMachine;
-
         IEntityController _player;
-        IHealth _health;
+
         [Header("Movements")]
         [SerializeField] float moveSpeed = 2f;
         [SerializeField] Transform[] patrols;
         [Header("Attack")]
+        [SerializeField] float maxAttackTime = 2f;
         [SerializeField] float chaseDistance = 3f;
         [SerializeField] float attackDistance = 0.5f;
         private void Awake()
         {
-            mover = new Mover(this,moveSpeed);
-            myAnimation = new CharacterAnimations(GetComponent<Animator>());
-            fliper = new Fliper(this);
-            _health = GetComponent<IHealth>();
             _stateMachine = new StateMachine();
-
             _player = FindObjectOfType<PlayerController>();
         }
         private void Start()
         {
+            IMover mover = new Mover(this, moveSpeed);
+            IMyAnimation myAnimation = new CharacterAnimations(GetComponent<Animator>());
+            IFliper fliper = new Fliper(this);
+            IAttacker attacker = GetComponent<IAttacker>();
+            IHealth health = GetComponent<IHealth>();
+
             Idle idle = new Idle(mover,myAnimation);
             Walk walk = new Walk(this, mover,myAnimation,fliper,patrols);
-            ChasePlayer chasePlayer = new ChasePlayer(this,_player,mover,fliper,myAnimation);
-            Attack attack = new Attack();
-            TakeHit takeHit = new TakeHit(_health,myAnimation);
+            ChasePlayer chasePlayer = new ChasePlayer(this,mover,fliper,myAnimation,IsPlayerRightSide);
+            Attack attack = new Attack(_player.transform.GetComponent<IHealth>(),fliper,myAnimation,attacker,maxAttackTime, IsPlayerRightSide);
+            TakeHit takeHit = new TakeHit(health,myAnimation);
             Dead dead = new Dead(this,myAnimation);
 
             _stateMachine.AddTransition(idle, walk,() => !idle.IsIdle);
@@ -53,7 +50,7 @@ namespace DungeonEscape.Concrates.Controllers
             _stateMachine.AddTransition(chasePlayer, idle, () => DistanceFromMeToPlayer() > chaseDistance);
             _stateMachine.AddTransition(attack, chasePlayer, () => DistanceFromMeToPlayer() > attackDistance);
 
-            _stateMachine.AddAnyState(dead, () => _health.IsDead);
+            _stateMachine.AddAnyState(dead, () => health.IsDead);
             _stateMachine.AddAnyState(takeHit, () => takeHit.IsTakeHit);
 
             _stateMachine.AddTransition(takeHit, chasePlayer, () => takeHit.IsTakeHit == false);
@@ -77,6 +74,11 @@ namespace DungeonEscape.Concrates.Controllers
         float DistanceFromMeToPlayer()
         {
             return Vector2.Distance(transform.position, _player.transform.position);
+        }
+        bool IsPlayerRightSide()
+        {
+            Vector3 result = _player.transform.position - this.transform.position;
+            return result.x > 0f ? true : false;
         }
     }
 }
