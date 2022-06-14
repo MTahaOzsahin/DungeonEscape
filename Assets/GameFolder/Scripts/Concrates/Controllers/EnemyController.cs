@@ -26,7 +26,7 @@ namespace DungeonEscape.Concrates.Controllers
             _stateMachine = new StateMachine();
             _player = FindObjectOfType<PlayerController>();
         }
-        private void Start()
+        private IEnumerator Start()
         {
             IMover mover = new Mover(this, moveSpeed);
             IMyAnimation myAnimation = new CharacterAnimations(GetComponent<Animator>());
@@ -56,6 +56,8 @@ namespace DungeonEscape.Concrates.Controllers
             _stateMachine.AddTransition(takeHit, chasePlayer, () => takeHit.IsTakeHit == false);
 
             _stateMachine.SetState(idle);
+
+            yield return null;
         }
 
         private void Update()

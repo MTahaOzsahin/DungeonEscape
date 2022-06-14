@@ -116,6 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   patrols: []
+  maxAttackTime: 1
   chaseDistance: 3
   attackDistance: 0.5
 --- !u!114 &4365013849661558134
@@ -131,6 +132,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 3
+  currentHealth: 0
 --- !u!114 &2714501128978385628
 MonoBehaviour:
   m_ObjectHideFlags: 0

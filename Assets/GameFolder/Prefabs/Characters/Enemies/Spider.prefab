@@ -93,6 +93,10 @@ PrefabInstance:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 22100000, guid: 094fe29680fbac1488da8551b22f796c, type: 2}
+    - target: {fileID: 4365013849661558134, guid: 72ffae24a0964784c9edaa9d80746b15, type: 3}
+      propertyPath: maxHealth
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 5222353574200520796, guid: 72ffae24a0964784c9edaa9d80746b15, type: 3}
       propertyPath: m_Size.x
       value: 1.5077453

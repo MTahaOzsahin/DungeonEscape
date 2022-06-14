@@ -15,7 +15,7 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
         public TakeHit(IHealth health,IMyAnimation myAnimation)
         {
             _myAnimation = myAnimation;
-            health.OnHealthChange += OnEnter;
+            health.OnHealthChange += (currentHealth,maxHealth) => OnEnter();
         }
         public void OnEnter()
         {
