@@ -6,6 +6,6 @@ namespace DungeonEscape.Concrates.Enums
 {
     public enum SceneTypeEnum
     {
-        Menu,Game,Splash
+        Menu,Game,SplashScreen
     }
 }

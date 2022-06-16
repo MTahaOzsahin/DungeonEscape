@@ -23,6 +23,7 @@ namespace DungeonEscape.Concrates.Uis
         private void OnDisable()
         {
             health.OnHealthChange -= HandleHealthChanged;
+            healthImage.fillAmount = 1f;
         }
 
         private void HandleHealthChanged(int currentHealth, int maxHealth)

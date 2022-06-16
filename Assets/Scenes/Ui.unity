@@ -357,6 +357,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 542508949, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6129851627099070725, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6895095539469574153, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
       propertyPath: m_Pivot.x
       value: 0
@@ -504,17 +512,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 52f4bc7e4a0c0ff489ef9716b26c1b6f, type: 3}
---- !u!114 &1760756791 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 127663934766599247, guid: 52f4bc7e4a0c0ff489ef9716b26c1b6f, type: 3}
-  m_PrefabInstance: {fileID: 1760756790}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 549840ded29d1c54eb55f164a4a66341, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &2052718318
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -522,14 +519,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 1040158303, guid: e336649f0363b2c4f91186593b95625c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1760756791}
-    - target: {fileID: 1813881094, guid: e336649f0363b2c4f91186593b95625c, type: 3}
-      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
-      value: 
-      objectReference: {fileID: 1760756791}
     - target: {fileID: 1448191553194171833, guid: e336649f0363b2c4f91186593b95625c, type: 3}
       propertyPath: m_Name
       value: MenuCanvas

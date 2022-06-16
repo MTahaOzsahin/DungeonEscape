@@ -8,5 +8,6 @@ namespace DungeonEscape.Abstracts
     {
         bool IsDead { get; }
         event System.Action<int,int> OnHealthChange;
+        event System.Action OnDead;
     }
 }

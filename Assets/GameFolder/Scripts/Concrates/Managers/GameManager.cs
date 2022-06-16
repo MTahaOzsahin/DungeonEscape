@@ -12,6 +12,7 @@ namespace DungeonEscape.Concrates.Managers
         public static GameManager Instance { get;private set; }
 
         public event System.Action<SceneTypeEnum> OnSceneChanged;
+        public event System.Action<int> OnScoreChanged;
         private void Awake()
         {
             SingletonThisObjrct();
@@ -28,27 +29,14 @@ namespace DungeonEscape.Concrates.Managers
                 Destroy(this.gameObject);
             }
         }
-        public void SplashScreen(string sceneName)
+        public void SplashScreen(SceneTypeEnum sceneTypeEnum)
         {
-            SceneTypeEnum sceneType;
-            switch (sceneName)
-            {
-                case "Game":
-                    sceneType = SceneTypeEnum.Game;
-                    break;
-                case "SplashScreen":
-                    sceneType = SceneTypeEnum.Splash;
-                    break;
-                default:
-                    sceneType = SceneTypeEnum.Menu;
-                    break;
-            }
-            StartCoroutine(SplashScreenAsync(sceneName,sceneType));
+            StartCoroutine(SplashScreenAsync(sceneTypeEnum));
         }
-        IEnumerator SplashScreenAsync(string sceneName,SceneTypeEnum sceneType)
+        IEnumerator SplashScreenAsync(SceneTypeEnum sceneType)
         {
-            yield return SceneManager.LoadSceneAsync("SplashScreen", LoadSceneMode.Additive);
-            OnSceneChanged?.Invoke(SceneTypeEnum.Splash);
+            yield return SceneManager.LoadSceneAsync(SceneTypeEnum.SplashScreen.ToString(), LoadSceneMode.Additive);
+            OnSceneChanged?.Invoke(SceneTypeEnum. SplashScreen);
 
             yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
             SceneManager.SetActiveScene(SceneManager.GetSceneByName("SplashScreen"));
@@ -56,15 +44,20 @@ namespace DungeonEscape.Concrates.Managers
             yield return new WaitForSeconds(3f);
 
             yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
-            yield return SceneManager.LoadSceneAsync(sceneName,LoadSceneMode.Additive);
+            yield return SceneManager.LoadSceneAsync(sceneType.ToString(),LoadSceneMode.Additive);
 
             OnSceneChanged.Invoke(sceneType);
 
-            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneName));
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName(sceneType.ToString()));
         }
         public void QuitGame()
         {
             Application.Quit();
+        }
+        public void IncreaseScore(int scorePoint)
+        {
+            score += scorePoint;
+            OnScoreChanged?.Invoke(score);
         }
     }
 }

@@ -11,13 +11,15 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
         IMover _mover;
         IFliper _fliper;
         IMyAnimation _myAnimation;
+        IStopEdge _stopEdge;
         System.Func<bool> _isPlayerRightSide;
-        public ChasePlayer(IEntityController enemyController,IMover mover,IFliper fliper,IMyAnimation myAnimation,System.Func<bool> isPlayerRightSide)
+        public ChasePlayer(IEntityController enemyController,IMover mover,IFliper fliper,IMyAnimation myAnimation,IStopEdge stopEdge,System.Func<bool> isPlayerRightSide)
         {
             _enemyController = enemyController;
             _mover = mover;
             _fliper = fliper;
             _myAnimation = myAnimation;
+            _stopEdge = stopEdge;
             _isPlayerRightSide = isPlayerRightSide;
         }
         public void OnEnter()
@@ -32,6 +34,11 @@ namespace DungeonEscape.Concrates.StateMachines.EnemyStates
 
         public void Tick()
         {
+            if (_stopEdge.ReachEdge())
+            {
+                _myAnimation.MoveAnimation(0f);
+                return;
+            }
             if (_isPlayerRightSide.Invoke())
             {
                 _mover.Movement(Vector2.right);

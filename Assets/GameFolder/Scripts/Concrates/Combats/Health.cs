@@ -13,6 +13,7 @@ namespace DungeonEscape.Concrates.Combats
         public bool IsDead => currentHealth < 1;
 
         public event System.Action<int,int> OnHealthChange;
+        public event System.Action OnDead;
 
         private void Awake()
         {
@@ -23,6 +24,8 @@ namespace DungeonEscape.Concrates.Combats
             if (IsDead) return;
             currentHealth -= attacker.Damage;
             OnHealthChange?.Invoke(currentHealth,maxHealth);
+
+            if (IsDead) OnDead?.Invoke();
         }
     }
 }

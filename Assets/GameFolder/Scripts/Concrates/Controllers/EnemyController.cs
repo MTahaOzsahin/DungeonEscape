@@ -21,6 +21,11 @@ namespace DungeonEscape.Concrates.Controllers
         [SerializeField] float maxAttackTime = 2f;
         [SerializeField] float chaseDistance = 3f;
         [SerializeField] float attackDistance = 0.5f;
+        [Header("Scores")]
+        [SerializeField] ScoreController scorePrefab;
+        [SerializeField] int currentChance;
+        [SerializeField] int maxChance = 70;
+        [SerializeField] int minChance = 30;
         private void Awake()
         {
             _stateMachine = new StateMachine();
@@ -28,18 +33,26 @@ namespace DungeonEscape.Concrates.Controllers
         }
         private IEnumerator Start()
         {
+            currentChance = Random.Range(minChance, maxChance);
             IMover mover = new Mover(this, moveSpeed);
             IMyAnimation myAnimation = new CharacterAnimations(GetComponent<Animator>());
             IFliper fliper = new Fliper(this);
+            IStopEdge stopEdge = GetComponent<StopEdge>();
             IAttacker attacker = GetComponent<IAttacker>();
             IHealth health = GetComponent<IHealth>();
 
             Idle idle = new Idle(mover,myAnimation);
             Walk walk = new Walk(this, mover,myAnimation,fliper,patrols);
-            ChasePlayer chasePlayer = new ChasePlayer(this,mover,fliper,myAnimation,IsPlayerRightSide);
+            ChasePlayer chasePlayer = new ChasePlayer(this,mover,fliper,myAnimation,stopEdge,IsPlayerRightSide);
             Attack attack = new Attack(_player.transform.GetComponent<IHealth>(),fliper,myAnimation,attacker,maxAttackTime, IsPlayerRightSide);
             TakeHit takeHit = new TakeHit(health,myAnimation);
-            Dead dead = new Dead(this,myAnimation);
+            Dead dead = new Dead(this,myAnimation,()=> 
+            {
+                if (currentChance > Random.Range(0,100))
+                {
+                    Instantiate(scorePrefab, transform.position, Quaternion.identity);
+                }
+            });
 
             _stateMachine.AddTransition(idle, walk,() => !idle.IsIdle);
             _stateMachine.AddTransition(idle, chasePlayer, () => DistanceFromMeToPlayer() < chaseDistance);

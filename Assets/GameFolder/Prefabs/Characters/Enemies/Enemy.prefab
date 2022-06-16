@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -8820532407843523825}
   - component: {fileID: 4365013849661558134}
   - component: {fileID: 2714501128978385628}
+  - component: {fileID: 8361892091306823567}
   m_Layer: 9
   m_Name: Enemy
   m_TagString: Untagged
@@ -119,6 +120,7 @@ MonoBehaviour:
   maxAttackTime: 1
   chaseDistance: 3
   attackDistance: 0.5
+  scorePrefab: {fileID: 5222767039312251898, guid: 192f1998fa2f902428560a7454dbde3f, type: 3}
 --- !u!114 &4365013849661558134
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,3 +148,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
+--- !u!114 &8361892091306823567
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5222353574200520797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3f903bd41006cfa4589fde9c7226ae4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  distance: 0.2
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024

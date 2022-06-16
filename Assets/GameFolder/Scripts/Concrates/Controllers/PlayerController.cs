@@ -1,6 +1,7 @@
 using DungeonEscape.Abstracts;
 using DungeonEscape.Concrates.Animations;
 using DungeonEscape.Concrates.Movement;
+using DungeonEscape.Concrates.Uis;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ namespace DungeonEscape.Concrates.Controllers
         IMover mover;
         IOnGroundChecker onGroundChecker;
         IJumper jumper;
+        IHealth health;
         InputsControllers inputControllers;
 
         float timer = 0f;
@@ -30,8 +32,13 @@ namespace DungeonEscape.Concrates.Controllers
             fliper = new Fliper(this);
             jumper = new Jumper(GetComponent<Rigidbody2D>());
             onGroundChecker = GetComponent<IOnGroundChecker>();
+            health = GetComponent<IHealth>();
         }
-
+        private void Start()
+        {
+            GameOverObject gameOverObject = FindObjectOfType<GameOverObject>();
+            gameOverObject.SetPlayerHealth(health);
+        }
         private void OnEnable()
         {
             inputControllers.Enable();
@@ -39,8 +46,8 @@ namespace DungeonEscape.Concrates.Controllers
             inputControllers.Land.DoubleJump.performed += jump;
             inputControllers.Land.Attack.performed += AttackAnimations;
             inputControllers.Land.PowerAttack.performed += PowerAttackAnimations;
+            health.OnDead += myAnimation.DeadAnimation;
         }
-
         private void OnDisable()
         {
             inputControllers.Disable();
@@ -49,20 +56,18 @@ namespace DungeonEscape.Concrates.Controllers
             inputControllers.Land.Attack.performed -= AttackAnimations;
             inputControllers.Land.PowerAttack.performed -= PowerAttackAnimations;
         }
-
         private void Update()
         {
+            if (health.IsDead) return;
             FlipAndMovement();
             Animations();
         }
-
         void FlipAndMovement()
         {
             Vector2 direction = inputControllers.Land.Movement.ReadValue<Vector2>();
             fliper.FlipCharacter(direction.x);
             mover.Movement(direction);
         }
-
         void jump(InputAction.CallbackContext context)
         {
             if (onGroundChecker.IsGround)
@@ -76,8 +81,6 @@ namespace DungeonEscape.Concrates.Controllers
                 timer = 0f;
             }
         }
-       
-
         void Animations()
         {
             Vector2 moveSpeed = inputControllers.Land.Movement.ReadValue<Vector2>();
