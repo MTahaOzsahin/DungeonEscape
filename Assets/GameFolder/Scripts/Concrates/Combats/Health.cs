@@ -22,10 +22,15 @@ namespace DungeonEscape.Concrates.Combats
         public void TakeHit(IAttacker attacker)
         {
             if (IsDead) return;
-            currentHealth -= attacker.Damage;
+            currentHealth = Mathf.Max(currentHealth -= attacker.Damage,0);
             OnHealthChange?.Invoke(currentHealth,maxHealth);
 
             if (IsDead) OnDead?.Invoke();
+        }
+        public void Heal(int lifeCount)
+        {
+            currentHealth = Mathf.Min(currentHealth += lifeCount, maxHealth);
+            OnHealthChange?.Invoke(currentHealth, maxHealth);
         }
     }
 }

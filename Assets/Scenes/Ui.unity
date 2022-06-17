@@ -144,7 +144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 227281264260422185, guid: 8f7d12cee94dd1f449e17853b22511a5, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -5.13
       objectReference: {fileID: 0}
     - target: {fileID: 227281264260422185, guid: 8f7d12cee94dd1f449e17853b22511a5, type: 3}
       propertyPath: m_LocalPosition.y
@@ -181,6 +181,10 @@ PrefabInstance:
     - target: {fileID: 227281264260422185, guid: 8f7d12cee94dd1f449e17853b22511a5, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 227281264260422186, guid: 8f7d12cee94dd1f449e17853b22511a5, type: 3}
+      propertyPath: field of view
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 227281264260422186, guid: 8f7d12cee94dd1f449e17853b22511a5, type: 3}
       propertyPath: m_BackGroundColor.b
@@ -357,14 +361,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 542508949, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6129851627099070725, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6895095539469574153, guid: d12aa43ea85bd8b42a6bc4d94292d5a8, type: 3}
       propertyPath: m_Pivot.x
       value: 0

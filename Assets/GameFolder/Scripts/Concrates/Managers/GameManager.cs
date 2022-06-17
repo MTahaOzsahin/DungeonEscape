@@ -11,11 +11,18 @@ namespace DungeonEscape.Concrates.Managers
         [SerializeField] int score;
         public static GameManager Instance { get;private set; }
 
+        public int Score => score;
+
         public event System.Action<SceneTypeEnum> OnSceneChanged;
         public event System.Action<int> OnScoreChanged;
         private void Awake()
         {
             SingletonThisObjrct();
+        }
+        private IEnumerator Start()
+        {
+            yield return SceneManager.LoadSceneAsync("Menu", LoadSceneMode.Additive);
+            SceneManager.SetActiveScene(SceneManager.GetSceneByName("Menu"));
         }
         void SingletonThisObjrct()
         {
@@ -57,6 +64,11 @@ namespace DungeonEscape.Concrates.Managers
         public void IncreaseScore(int scorePoint)
         {
             score += scorePoint;
+            OnScoreChanged?.Invoke(score);
+        }
+        public void DecreaseScore(int scorePoint)
+        {
+            score -= scorePoint;
             OnScoreChanged?.Invoke(score);
         }
     }
