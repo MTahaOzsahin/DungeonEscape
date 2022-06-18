@@ -13,9 +13,11 @@ Final version (which not uploaded to itch.io) has mobile support. You can see in
 
 # What is focused in project:
 
+*Unity New Input System.
+
 *Gamepad support.
 
-*Mobile version inclueded .apk builds.
+*Mobile version support. inclueded .apk builds.
 
 *Inheritance and interfaces.
 
@@ -23,7 +25,7 @@ Final version (which not uploaded to itch.io) has mobile support. You can see in
 
 *Animation Override Controller.
 
-*State Machine.
+*StateMachine, State StateTransition.
 
 *Enemy loot/Controller.
 
