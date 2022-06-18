@@ -25,7 +25,7 @@ Final version (which not uploaded to itch.io) has mobile support. You can see in
 
 *Animation Override Controller.
 
-*StateMachine, State StateTransition.
+*StateMachine, StateTransition.
 
 *Enemy loot/Controller.
 
