@@ -1,5 +1,5 @@
 # Project5 Dungeon Escape
-Demo link: (https://mtahaozsahin.itch.io/dungeon-escape)](https://mtahaozsahin.itch.io/dungeon-escape)
+Demo link: (https://mtahaozsahin.itch.io/dungeon-escape)]
 
 This Unity project has been created to improve myself. A knight try to survive from enemies by killing them and restore health.
 
